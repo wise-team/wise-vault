@@ -4,5 +4,5 @@ services:
   #§ data.config.vault.docker.services.vault.name + ':'
   vault:
     volumes:
-      #§ '- ' + d(data.config.vault.backendFilePath) + ':/vault/file:rw'
-      - /opt/wise/vault/Vaultfile:/vault/file:rw
+      #§ '- ' + d(data.config.vault.backendFilePath) + ':/vault/backend_file:rw'
+      - /opt/wise/vault/Vaultfile:/vault/backend_file:rw
