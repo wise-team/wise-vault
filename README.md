@@ -14,10 +14,29 @@ Vault is deployed with ansible playbooks. Just run the wise-vote playbook with `
 
 ### Init
 ```bash
+# 1.
 $ ./scripts/vault-exec.sh status # check if vault is accessible
 $ ./scripts/vault-exec.sh operator init 
 # This command will output 5 unseal keys. Distribute them among wise-team members.
 # Warning! This can be done only once. There is no possibility to reset unseal keys. 
+
+# 2.
+# After init, please do unseal with three keys as shown below.
+
+# 3. Enter vault and execute the following commands:
+$ ./scripts/vault-enter.sh
+$ vault operator unseal
+$ vault operator unseal
+$ vault operator unseal
+
+$ export VAULT_TOKEN="...root token" # we will revoke it later
+$ vault policy write admin /wise-vault/policies/admin.hcl
+$ vault policy write provisioner /wise-vault/policies/provisioner.hcl
+
+$ vault auth enable userpass
+$ vault write auth/userpass/users/noisy password=... policies=admin,provisioner
+$ vault write auth/userpass/users/jblew password=... policies=admin,provisioner
+$ vault write auth/userpass/users/perduta password=... policies=admin,provisioner
 ```
 
 ### Unseal
