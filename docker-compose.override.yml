@@ -1,1 +1,6 @@
 version: "3"
+services:
+  #§ data.config.vault.docker.services.vault.name + ':'
+  vault:
+    volumes:
+      - ./Vaultfile:/vault/backend_file:rw
