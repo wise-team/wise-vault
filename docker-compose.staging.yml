@@ -1,0 +1,8 @@
+version: "3"
+
+services:
+  #§ data.config.vault.docker.services.vault.name + ':'
+  vault:
+    volumes:
+      #§ '- ' + d(data.config.vault.backendFilePath) + ':/vault/file:rw'
+      - /opt/wise/data/Vaultfile:/vault/file:rw

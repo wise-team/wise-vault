@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+  #§ data.config.vault.docker.services.vault.name + ':'
+  vault:
+    build:
+      context: .
+      args:
+        #§ 'vault_hostname: ' + data.config.vault.docker.services.vault.container
+        vault_hostname: wise-vault
+    #§ 'image: ' + data.config.vault.docker.services.vault.image
+    image: wise/vault
+    #§ 'container_name: ' + data.config.vault.docker.services.vault.container
+    container_name: wise-vault
+    command: vault server -config /vault/config/vault-config.json
+    cap_add:
+      - IPC_LOCK
+    volumes:
+      - ./vault-config.json:/vault/config/vault-config.json:ro
+      - ./Vaultfile:/vault/file:rw
+    environment:
+      VAULT_API_ADDR: https://0.0.0.0:8200
+    ports:
+      #§ '- ' + url(d(data.config.vault.url)).hostname + ':' + url(d(data.config.vault.url)).port + ':8200'
+      - 127.0.0.1:8200:8200
