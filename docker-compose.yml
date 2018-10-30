@@ -3,11 +3,7 @@ version: "3"
 services:
   #§ data.config.vault.docker.services.vault.name + ':'
   vault:
-    build:
-      context: .
-      args:
-        #§ 'vault_hostname: ' + data.config.vault.docker.services.vault.container
-        vault_hostname: wise-vault
+    build: .
     #§ 'image: ' + data.config.vault.docker.services.vault.image
     image: wise/vault
     #§ 'container_name: ' + data.config.vault.docker.services.vault.container
