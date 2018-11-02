@@ -1,0 +1,39 @@
+{
+  "name": "wise-vault-initvault",
+  "version": "3.0.1",
+  "description": "Wise vault init",
+  "engines": {
+    "node": ">=10.12"
+  },
+  "scripts": {
+    "init-vault": "ts-node src/init-vault.ts"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "lodash": "^4.17.11"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.117",
+    "@types/node": "^10.11.0",
+    "ts-node": "^6.2.0",
+    "typescript": "^2.9.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wise-team/wise-vault.git"
+  },
+  "keywords": [
+    "steem",
+    "blockchain",
+    "wise"
+  ],
+  "author": "The Wise Team (https://wise-team.io/)",
+  "contributors": [
+    "Jędrzej Lewandowski <jedrzejblew@gmail.com> (https://jedrzej.lewandowski.doctor/)"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wise-team/wise-vault/issues"
+  },
+  "homepage": "https://wise.vote/"
+}

@@ -1,0 +1,114 @@
+import * as fs from "fs";
+import { adminPolicy } from "./admin-policy.hcl";
+
+export const unseal = 
+/*§ "\n" + JSON.stringify(data.config.vault.unseal, undefined, 2) + "\n" §*/
+{
+  "secret_shares": 4,
+  "secret_threshold": 2
+}
+/*§ §.*/
+;
+
+export const auths = 
+/*§ "\n" + JSON.stringify(data.config.vault.auths, undefined, 2) + "\n" §*/
+{
+  "AppRole": {
+    "type": "approle",
+    "description": "Docker service login",
+    "config": {}
+  },
+  "userpass": {
+    "type": "userpass",
+    "description": "User login",
+    "config": {}
+  }
+}
+/*§ §.*/
+;
+
+export const policies: { name: string; policy: string; } [] = [
+/*§ "\n" + data.config.vault.policies(data.config).map(policy => "    { name: \"" + policy.name + "\", policy: `\n" + policy.policy +  "`},\n").reduce((prev, current) => prev + current) §*/
+    { name: "wise-hub-api", policy: `
+
+                    # Manage hub/public secrets
+                    path "secret/hub/public/*"
+                    {
+                      capabilities = ["create", "read", "update", "delete", "list"]
+                    }
+                    `},
+    { name: "wise-hub-daemon", policy: `
+
+                    # Manage hub/public secrets
+                    path "secret/hub/public/*"
+                    {
+                      capabilities = ["create", "read", "update", "delete", "list"]
+                    }
+                    `},
+/*§ §.*/
+  {
+    name: "admin",
+    policy: adminPolicy
+  }
+];
+
+
+export const roles = 
+/*§ "\n" + JSON.stringify(data.config.vault.roles(data.config).map(role => { role.policies = role.policies(data.config); return role; }), undefined, 2) + "\n" §*/
+[
+  {
+    "role": "wise-hub-api",
+    "policies": [
+      "wise-hub-api"
+    ],
+    "secretMount": "/secret/api-role.json"
+  },
+  {
+    "role": "wise-hub-daemon",
+    "policies": [
+      "wise-hub-daemon"
+    ],
+    "secretMount": "/secret/daemon-role.json"
+  }
+]
+/*§ §.*/
+;
+
+export const users = 
+/*§ "\n" + JSON.stringify(data.config.vault.users, undefined, 2) + "\n" §*/
+[
+  {
+    "username": "jblew",
+    "policies": [
+      "admin"
+    ]
+  },
+  {
+    "username": "noisy",
+    "policies": [
+      "admin"
+    ]
+  }
+]
+/*§ §.*/
+;
+
+export const secrets = 
+/*§ "\n" + JSON.stringify(data.config.vault.secrets, undefined, 2) + "\n" §*/
+{
+  "humanEnter": {
+    "steemConnectClientId": {
+      "description": "Steemconnect client_id",
+      "key": "/human/steemconnect/client_id"
+    },
+    "slackWebhookUrl": {
+      "description": "Slack Webhook URL",
+      "key": "/human/slack/webhook_url"
+    }
+  },
+  "generated": {
+    "sessionSalt": "/generated/session/salt"
+  }
+}
+/*§ §.*/
+;

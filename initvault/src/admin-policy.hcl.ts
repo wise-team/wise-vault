@@ -1,3 +1,4 @@
+export const adminPolicy = `
 # Manage auth methods broadly across Vault
 path "auth/*"
 {
@@ -37,5 +38,24 @@ path "sys/policies/acl/*"
 # List, create, update, and delete key/value secrets
 path "secret/*"
 {
-  capabilities = ["create", "read", "update", "delete", "list"]
+  capabilities = ["create", "read", "update", "delete", "list", "sudo"]
 }
+
+# Manage secret engines
+path "sys/mounts/*"
+{
+  capabilities = ["create", "read", "update", "delete", "list", "sudo"]
+}
+
+# List existing secret engines.
+path "sys/mounts"
+{
+  capabilities = ["read"]
+}
+
+# Read health checks
+path "sys/health"
+{
+  capabilities = ["read", "sudo"]
+}
+`;
