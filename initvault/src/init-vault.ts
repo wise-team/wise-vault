@@ -75,8 +75,10 @@ async function run() {
         console.log("Create role " + role.role);
         const createRoleResp = await vault.createAppRoleRole(role.role, role.policies);
         const roleId = await vault.getAppRoleId(role.role);
+        console.log("Generate role secret id");
+        const secretId = await vault.generateAppRoleSecretId(role.role, { when: "init-vault" });
         
-        toSave.appRoles.push({ role: role.role, role_id: roleId });
+        toSave.appRoles.push({ role: role.role, role_id: roleId, secret_id: secretId });
     }
 
 

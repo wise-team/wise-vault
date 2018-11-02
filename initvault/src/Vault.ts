@@ -124,6 +124,11 @@ export class Vault {
         return d(resp.data.data.role_id);
     }
 
+    public async generateAppRoleSecretId(roleName: string, metadata: any): Promise<string> {
+        const resp = await this.call("POST", "/v1/auth/approle/role/"  + roleName + "/secret-id", { metadata: JSON.stringify(metadata) });
+        return d(resp.data.data.secret_id);
+    }
+
     public async revokeSelf() {
         await this.call("POST", "/v1/auth/token/revoke-self", undefined);
     }
