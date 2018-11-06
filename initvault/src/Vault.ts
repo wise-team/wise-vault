@@ -111,7 +111,7 @@ export class Vault {
         await this.call("POST", "/v1/sys/auth/" + method, { type: method, description: description, config: config });
     }
 
-    public async createUserpassUser(username: string, password: string, policies: string [],) {
+    public async createUserpassUser(username: string, password: string, policies: string []) {
         await this.call("POST", "/v1/auth/userpass/users/" + username, { password: password, policies: policies.join(",") });
     }
 

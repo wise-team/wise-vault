@@ -1,5 +1,11 @@
 version: "3"
 
+networks:
+  vault-net:
+    external:
+      #§ 'name: ' + data.config.vault.docker.network
+      name: vault-net
+
 services:
   #§ data.config.vault.docker.services.vault.name + ':'
   vault:
@@ -18,3 +24,7 @@ services:
     ports:
       #§ '- ' + url(d(data.config.vault.url)).hostname + ':' + url(d(data.config.vault.url)).port + ':8200'
       - 127.0.0.1:8200:8200
+    networks:
+      - default
+      #§ '- ' + data.config.vault.docker.network
+      - vault-net

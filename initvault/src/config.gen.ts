@@ -28,22 +28,19 @@ export const auths =
 ;
 
 export const policies: { name: string; policy: string; } [] = [
-/*§ "\n" + data.config.vault.policies(data.config).map(policy => "    { name: \"" + policy.name + "\", policy: `\n" + policy.policy +  "`},\n").reduce((prev, current) => prev + current) §*/
+/*§ "\n" + data.config.vault.policies(data.config).map(policy => "    { name: \"" + policy.name + "\", policy: `\n" + policy.policy(data.config) +  "`},\n").reduce((prev, current) => prev + current) §*/
     { name: "wise-hub-api", policy: `
 
-                    # Manage hub/public secrets
-                    path "secret/hub/public/*"
-                    {
-                      capabilities = ["create", "read", "update", "delete", "list"]
-                    }
+                    path "secret/hub/public/*" { capabilities = ["create", "read", "update", "delete", "list"] }
+                    path "secret/human/steemconnect/client_id" { capabilities = [ "read" ] }
+                    path "secret/generated/session/salt" { capabilities = [ "read" ] }
+                    path "secret/hub/steemconnect/users/*" { capabilities = [ "create", "read", "update", "delete", "list" ] }
                     `},
     { name: "wise-hub-daemon", policy: `
 
-                    # Manage hub/public secrets
-                    path "secret/hub/public/*"
-                    {
-                      capabilities = ["create", "read", "update", "delete", "list"]
-                    }
+                    path "secret/hub/public/*" { capabilities = ["create", "read", "update", "delete", "list"] }
+                    path "secret/human/steemconnect/client_id" { capabilities = [ "read" ] }
+                    path "secret/hub/steemconnect/users/*" { capabilities = [ "create", "read", "update", "delete", "list" ] }
                     `},
 /*§ §.*/
   {
@@ -60,15 +57,13 @@ export const roles =
     "role": "wise-hub-api",
     "policies": [
       "wise-hub-api"
-    ],
-    "secretMount": "/secret/api-role.json"
+    ]
   },
   {
     "role": "wise-hub-daemon",
     "policies": [
       "wise-hub-daemon"
-    ],
-    "secretMount": "/secret/daemon-role.json"
+    ]
   }
 ]
 /*§ §.*/
