@@ -1,6 +1,6 @@
 {
   "name": "wise-vault-initvault",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "Wise vault init",
   "engines": {
     "node": ">=10.12"

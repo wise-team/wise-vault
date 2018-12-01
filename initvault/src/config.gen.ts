@@ -34,13 +34,17 @@ export const policies: { name: string; policy: string; } [] = [
                     path "secret/hub/public/*" { capabilities = ["create", "read", "update", "delete", "list"] }
                     path "secret/human/steemconnect/client_id" { capabilities = [ "read" ] }
                     path "secret/generated/session/salt" { capabilities = [ "read" ] }
-                    path "secret/hub/steemconnect/users/*" { capabilities = [ "create", "read", "update", "delete", "list" ] }
+                    path "secret/hub/steemconnect/users/profiles/*" { capabilities = [ "create", "read", "update", "delete", "list" ] }
+                    path "secret/hub/steemconnect/users/access_tokens/*" { capabilities = [ "create", "read", "update", "delete" ] }
+                    path "secret/hub/steemconnect/users/refresh_tokens/*" { capabilities = [ "create", "read", "update", "delete" ] }
                     `},
     { name: "wise-hub-daemon", policy: `
 
                     path "secret/hub/public/*" { capabilities = ["create", "read", "update", "delete", "list"] }
                     path "secret/human/steemconnect/client_id" { capabilities = [ "read" ] }
                     path "secret/hub/steemconnect/users/*" { capabilities = [ "create", "read", "update", "delete", "list" ] }
+                    path "secret/hub/steemconnect/users/access_tokens/*" { capabilities = [ "read", "update" ] }
+                    path "secret/hub/steemconnect/users/refresh_tokens/*" { capabilities = [ "read" ] }
                     `},
 /*§ §.*/
   {
