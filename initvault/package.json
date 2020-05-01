@@ -6,11 +6,14 @@
     "node": ">=10.12"
   },
   "scripts": {
-    "init-vault": "ts-node src/init-vault.ts"
+    "init-vault": "ts-node src/init-vault.ts",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.11",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.117",
@@ -35,5 +38,6 @@
   "bugs": {
     "url": "https://github.com/wise-team/wise-vault/issues"
   },
-  "homepage": "https://wise.vote/"
+  "homepage": "https://wise.vote/",
+  "snyk": true
 }
