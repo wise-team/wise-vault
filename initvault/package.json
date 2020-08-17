@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.20"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.117",
